@@ -150,7 +150,7 @@ const ProductDetail = () => {
                                     </div>
                                     <div className="text-sm text-slate-500">Posted on {new Date(product.postDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
                                 </div>
-                                <div className="mt-auto pt-8 hidden md:flex flex-col sm:flex-row gap-4">
+                                {/* <div className="mt-auto pt-8 hidden md:flex flex-col sm:flex-row gap-4">
                                     <button onClick={() => addToCart(product)} className="flex-1 flex items-center justify-center gap-2 border border-slate-300 text-slate-800 py-3 px-6 rounded-lg font-semibold hover:bg-slate-100 transition-colors">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                                         Add to Cart
@@ -158,6 +158,35 @@ const ProductDetail = () => {
                                     <button onClick={handleBuyNow} className="flex-1 bg-slate-700 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-300 transform hover:scale-105 shadow-md">
                                         Buy Now
                                     </button>
+                                </div> */}
+                                <div className="mt-auto pt-8 hidden md:flex flex-col sm:flex-row gap-4">
+                                    {product.isBooked ? (
+                                        <button
+                                        disabled
+                                        className="flex-1 py-3 px-6 rounded-lg font-semibold text-white bg-gray-400 cursor-not-allowed opacity-80"
+                                        >
+                                        Sold Out
+                                        </button>
+                                    ) : (
+                                        <>
+                                        <button
+                                            onClick={() => addToCart(product)}
+                                            className="flex-1 flex items-center justify-center gap-2 border border-slate-300 text-slate-800 py-3 px-6 rounded-lg font-semibold hover:bg-slate-100 transition-colors"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                                            Add to Cart
+                                        </button>
+
+                                        <button
+                                            onClick={handleBuyNow}
+                                            className="flex-1 bg-slate-700 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-800 transition-all duration-300 transform hover:scale-105 shadow-md"
+                                        >
+                                            Buy Now
+                                        </button>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -196,7 +225,7 @@ const ProductDetail = () => {
             )}
 
             {/* Sticky Mobile Action Bar */}
-            <div className="sticky bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-3 flex gap-3 md:hidden z-40 border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+            {/* <div className="sticky bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-3 flex gap-3 md:hidden z-40 border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
                 <button onClick={() => addToCart(product)} className="flex-1 flex items-center justify-center gap-2 border border-slate-300 text-slate-800 py-3 px-4 rounded-lg font-semibold hover:bg-slate-100 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                     Add to Cart
@@ -204,6 +233,34 @@ const ProductDetail = () => {
                 <button onClick={handleBuyNow} className="flex-1 bg-slate-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-slate-800 transition-colors">
                     Buy Now
                 </button>
+            </div> */}
+            <div className="sticky bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-3 flex gap-3 md:hidden z-40 border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+                {product.isBooked ? (
+                    <button
+                    disabled
+                    className="w-full bg-gray-400 text-white py-3 px-4 rounded-lg font-semibold cursor-not-allowed opacity-80"
+                    >
+                    Sold Out
+                    </button>
+                ) : (
+                    <>
+                    <button
+                        onClick={() => addToCart(product)}
+                        className="flex-1 flex items-center justify-center gap-2 border border-slate-300 text-slate-800 py-3 px-4 rounded-lg font-semibold hover:bg-slate-100 transition-colors"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Add to Cart
+                    </button>
+                    <button
+                        onClick={handleBuyNow}
+                        className="flex-1 bg-slate-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+                    >
+                        Buy Now
+                    </button>
+                    </>
+                )}
             </div>
         </>
     );
