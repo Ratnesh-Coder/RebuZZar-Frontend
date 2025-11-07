@@ -161,12 +161,14 @@ const ProductDetail = () => {
                                 </div> */}
                                 <div className="mt-auto pt-8 hidden md:flex flex-col sm:flex-row gap-4">
                                     {product.isBooked ? (
-                                        <button
-                                        disabled
-                                        className="flex-1 py-3 px-6 rounded-lg font-semibold text-white bg-gray-400 cursor-not-allowed opacity-80"
-                                        >
-                                        Sold Out
-                                        </button>
+                                        <>
+                                            <button
+                                                disabled
+                                                className="flex-1 py-3 px-6 rounded-lg font-semibold text-white bg-gray-400 cursor-not-allowed opacity-80"
+                                            >
+                                                Sold Out
+                                            </button>
+                                        </>
                                     ) : (
                                         <>
                                         <button

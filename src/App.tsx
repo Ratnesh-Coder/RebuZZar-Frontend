@@ -1,11 +1,10 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { debug } from "./utils/debug";
 import { useAuth } from "./context/AuthContext";
-import AdminRoute from "./components/AdminRoute"; 
+import { debug } from "./utils/debug";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import Menubar from "./components/Menubar";
@@ -16,18 +15,21 @@ import Checkout from "./components/Checkout";
 import Sell from "./components/Sell";
 import ProductDetail from "./components/ProductDetail";
 import EditProduct from "./components/EditProduct";
-import BookingSuccess from './components/BookingSuccess';
-import MyBookings from './components/MyBookings';
+import BookingSuccess from "./components/BookingSuccess";
+import MyBookings from "./components/MyBookings";
 import ResetPassword from "./components/ResetPassword";
 import Footer from "./components/Footer";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import ReturnRefundPolicy from "./components/ReturnRefundPolicy";
 import FAQ from "./components/FAQ";
+import AdminRoute from "./components/AdminRoute";
 
-// --- Lazy-loaded Admin components ---
+// 👇 Import the ScrollToTop component
+import ScrollToTop from "./components/ScrollToTop";
+
+// --- Lazy-loaded Admin component ---
 const AdminPendingProducts = lazy(() => import("./components/AdminPendingProducts"));
-// const AdminRoute = lazy(() => import("./components/AdminRoute"));
 
 const App: React.FC = () => {
   const [search, setSearch] = useState<string>("");
@@ -35,9 +37,11 @@ const App: React.FC = () => {
 
   const { user } = useAuth();
 
-  // ✅ Safe debug (shows only in dev)
+  // Safe debug (shows only in dev)
   useEffect(() => {
-    debug("Logged-in user (safe log):", { email: user?.email, role: user?.role });
+    if (import.meta.env.DEV) {
+      debug("Logged-in user:", { email: user?.email, role: user?.role });
+    }
   }, [user]);
 
   return (
@@ -53,6 +57,9 @@ const App: React.FC = () => {
         <div className="hidden md:block">
           <Menubar setMenu={setMenu} />
         </div>
+
+        {/* Scrolls to top on every route change */}
+        <ScrollToTop />
 
         {/* Routes */}
         <Routes>
